@@ -38,6 +38,9 @@ Route::prefix('auth')->group(function () {
     Route::post('register', [AuthController::class, 'register']);
 });
 
+Route::fallback(function(){
+    return response()->json(['error' => 'Route don\'t exist or method not supported'], 404);
+});
 
 
 

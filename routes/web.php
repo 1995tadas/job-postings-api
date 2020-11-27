@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,5 +13,8 @@
 |
 */
 
+Route::fallback(function(){
+    return response()->json(['error' => 'Route don\'t exist'], 404);
+});
 
 
