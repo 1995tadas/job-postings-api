@@ -1,6 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PostingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +15,29 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+
+Route::prefix('job')->group(function () {
+    Route::middleware('check.language')->group(function () {
+        Route::get('{lang}/{id}/show', [PostingController::class, 'show'])->whereNumber('id');
+        Route::get('{lang}/', [PostingController::class, 'index']);
+    });
+    Route::middleware('auth:api')->group(function () {
+        Route::post('/', [PostingController::class, 'store']);
+        Route::middleware('author')->group(function () {
+            Route::put('{id}', [PostingController::class, 'update'])->whereNumber('id');
+        });
+    });
 });
+
+Route::prefix('auth')->group(function () {
+    Route::middleware('auth:api')->group(function () {
+        Route::post('logout', [AuthController::class, 'logout']);
+        Route::post('refresh', [AuthController::class, 'refresh']);
+    });
+    Route::post('login', [AuthController::class, 'login']);
+    Route::post('register', [AuthController::class, 'register']);
+});
+
+
+
+

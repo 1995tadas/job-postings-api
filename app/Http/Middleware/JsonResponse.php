@@ -2,11 +2,10 @@
 
 namespace App\Http\Middleware;
 
-use App\Services\LocaleService;
 use Closure;
 use Illuminate\Http\Request;
 
-class SetLocale
+class JsonResponse
 {
     /**
      * Handle an incoming request.
@@ -17,11 +16,7 @@ class SetLocale
      */
     public function handle(Request $request, Closure $next)
     {
-        $locale = session('locale');
-        if ($locale) {
-            $localeService = new LocaleService();
-            $localeService->setLocale($locale);
-        }
+        $request->headers->set('Accept', 'application/json');
 
         return $next($request);
     }

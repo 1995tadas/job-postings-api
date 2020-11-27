@@ -14,10 +14,19 @@ class JobAreaService
         ]);
     }
 
-    public function updateJobArea(object $jobArea, ?string $content): bool
+    public function updateJobArea(JobArea $jobArea, ?string $content): bool
     {
         return $jobArea->update([
             'content' => ucfirst($content),
         ]);
+    }
+
+    public function deleteJobArea(JobArea $jobArea): bool
+    {
+        try {
+            return $jobArea->delete();
+        } catch (\Exception $e) {
+            abort(404);
+        }
     }
 }

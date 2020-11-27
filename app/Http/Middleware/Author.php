@@ -18,9 +18,14 @@ class Author
     public function handle(Request $request, Closure $next)
     {
         $id = $request->route('id');
-        $posting = Posting::where('user_id', auth()->user()->id)->find($id);
+        $posting = Posting::find($id);
         if (!$posting) {
-            return redirect()->back();
+            return response()->json(['error' => 'Record not Found'], 404);
+        }
+
+        $postingAuthor = Posting::where('user_id', auth()->user()->id)->find($id);
+        if (!$postingAuthor) {
+            return response()->json(['error' => 'You are not an author'], 401);
         }
 
         return $next($request);

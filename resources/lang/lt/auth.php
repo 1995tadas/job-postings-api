@@ -13,18 +13,6 @@ return [
     |
     */
 
-    'failed' => 'Tokio vartotojo nėra mūsų duomenų bazėje.',
-    'password' => 'Slaptažodis yra neteisingas.',
-    'throttle' => 'Per daug bandymų prisijungti. Palaukite :seconds sekundes.',
-    'login' =>'Prisijugti',
-    'register' =>'Registruotis',
-    'logout' =>'Atsijungti',
-    'email' =>'E-paštas',
-    'pass' =>'Slaptažodis',
-    'confirm'=>"Patvirtinti slaptažodį",
-    'remember' =>'Prisiminti mane',
-    'name' =>'Vardas',
-    'registered'=>'Jau registruotas'
 
 
 ];

@@ -23,12 +23,26 @@ class PostingRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'title.*' => 'required|string|min:2|max:255',
-            'description.*' => 'required|string|min:5|max:500',
-            'salary.*' => 'required|string|min:5|max:500',
-            'areas.en.*'=> 'nullable|string|min:2|max:255',
-            'areas.lt.*'=> 'sometimes|nullable|string|min:2|max:255',
-        ];
+        $rules = [];
+
+        $titleRules = 'required|string|min:2|max:255';
+        $descriptionRules = 'required|string|min:5|max:500';
+        $salaryRules = 'required|string|min:5|max:500';
+        $areasRules = 'sometimes|nullable|string|min:2|max:255';
+
+        $available_locales = config('app.available_locales');
+        foreach ($available_locales as $language){
+            $rules['title.'.$language] = $titleRules;
+            $rules['description.'.$language] = $descriptionRules;
+            $rules['salary.'.$language] = $salaryRules;
+        }
+
+        for ($i = 0; $i <= 5; $i++) {
+            foreach ($available_locales as $language) {
+                $rules['areas.'.$language.'.'. $i] = $areasRules;
+            }
+        }
+
+        return $rules;
     }
 }
