@@ -5,7 +5,7 @@
 
 # DEMO
 
-https://job-postings-api.herokuapp.com/job/
+https://job-postings-api.herokuapp.com/api/job/lt/
 
 ## How to deploy
 

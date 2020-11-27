@@ -41,6 +41,3 @@ Route::prefix('auth')->group(function () {
 Route::fallback(function(){
     return response()->json(['error' => 'Route don\'t exist or method not supported'], 404);
 });
-
-
-
