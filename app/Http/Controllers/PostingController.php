@@ -23,7 +23,8 @@ class PostingController extends Controller
             return response()->json(['error' => 'No records found'], 404);
         }
 
-        $postingsTranslations = PostingsTranslation::whereIn('posting_id', $posting)->where('language', $lang)->select('posting_id', 'title')->latest()->simplePaginate(10);
+        $postingsTranslations = PostingsTranslation::whereIn('posting_id', $posting)->where('language', $lang)
+            ->select('posting_id', 'title')->latest()->simplePaginate(10);
         return response()->json($postingsTranslations);
     }
 
@@ -31,7 +32,8 @@ class PostingController extends Controller
     {
         $posting = Posting::find($id);
         if ($posting) {
-            $postingsTranslation = PostingsTranslation::where('language', $lang)->where('posting_id', $posting->id)->with('jobAreas')->first();
+            $postingsTranslation = PostingsTranslation::where('language', $lang)
+                ->where('posting_id', $posting->id)->with('jobAreas')->first();
             if ($postingsTranslation) {
                 return response()->json($postingsTranslation);
             }

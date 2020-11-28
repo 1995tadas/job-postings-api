@@ -32,7 +32,7 @@ class PostingService
                 }
             }
 
-            return response()->json(['message' => 'Saved successfully!']);
+            return response()->json(['message' => 'Saved successfully!'], 201);
         }
 
         return response()->json(['error' => 'Internal server error'], 500);
@@ -79,7 +79,7 @@ class PostingService
                 }
             }
 
-            return response()->json(['message' => 'Record successfully updated!']);
+            return response()->json(['message' => 'Record successfully updated!'], 201);
         }
 
         return response()->json(['error' => 'Record with id ' . $posting_id . ' don\'t exist '], 404);
